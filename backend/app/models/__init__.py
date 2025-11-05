@@ -1,0 +1,2 @@
+# Modele danych SQLAlchemy
+
