@@ -26,7 +26,7 @@ engine = create_db_engine()
 SessionLocal = get_session_local(engine)
 
 
-# Dependency do pobierania sesji bazy danych
+# Dependency for getting database session
 def get_db():
     db = SessionLocal()
     try:
