@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 from datetime import datetime
 from typing import Optional
 
@@ -41,14 +41,18 @@ class LoanRequest(BaseModel):
 
     @field_validator("card_number")
     @classmethod
-    def validate_card_number(cls, v: Optional[str], info) -> Optional[str]:
-        action = info.data.get('action')
-        if action == "borrow" and not v:
-            raise ValueError("Card number is required for borrow action")
-        if action == "return" and v:
-            raise ValueError("Card number is not allowed for return action")
+    def validate_card_number(cls, v: Optional[str]) -> Optional[str]:
         if v and not v.isdigit():
             raise ValueError("Card number must contain only digits")
         if v and len(v) != 6:
             raise ValueError("Card number must be 6 digits")
         return v
+
+    @model_validator(mode='after')
+    def validate_card_number_required(self):
+        """Validate that card_number is required for borrow action"""
+        if self.action == "borrow" and not self.card_number:
+            raise ValueError("Card number is required for borrow action")
+        if self.action == "return" and self.card_number:
+            raise ValueError("Card number is not allowed for return action")
+        return self

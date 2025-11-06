@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
+from sqlalchemy import select, delete
 from typing import List
 from datetime import datetime
 
@@ -60,7 +60,7 @@ async def delete_book(serial: str, db: AsyncSession = Depends(get_db)):
             detail=f"Book with serial number {serial} not found"
         )
     
-    await db.delete(book)
+    await db.execute(delete(Book).where(Book.serial == serial))
     await db.commit()
     
     return None
