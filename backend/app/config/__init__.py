@@ -20,7 +20,7 @@ def get_database_url() -> str:
     if settings.database_url:
         return settings.database_url
     return (
-        f"postgresql://{settings.postgres_user}:{settings.postgres_password}"
+        f"postgresql+asyncpg://{settings.postgres_user}:{settings.postgres_password}"
         f"@{settings.postgres_host}:{settings.postgres_port}/{settings.postgres_db}"
     )
 

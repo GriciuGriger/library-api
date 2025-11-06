@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.db import Base, engine
 from app.models import Book  # Import models so SQLAlchemy can see them
+from app.routers import books
 
 
 app = FastAPI(
@@ -30,8 +31,13 @@ async def health():
     return {"status": "ok"}
 
 
+# Include routers
+app.include_router(books.router)
+
+
 @app.on_event("startup")
 async def startup_event():
     """Create database tables on startup"""
-    Base.metadata.create_all(bind=engine)
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
 
