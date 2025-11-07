@@ -95,4 +95,3 @@ curl -X PATCH "http://localhost:8000/books/123456/loan" \
 
 - Add Alembic migrations (currently using metadata auto-create).
 - Introduce GitHub Actions workflow for lint/tests & docker smoke.
-- Implement React frontend and re-enable the web service in `docker-compose.yml`.
