@@ -1,4 +1,4 @@
-version: "3.9"
+# version: "3.9"  # Obsolete in newer Docker Compose versions
 
 services:
   db:
@@ -28,15 +28,6 @@ services:
       UVICORN_PORT: 8000
     ports:
       - "8000:8000"
-
-  web:
-    build: ./frontend
-    depends_on:
-      - api
-    environment:
-      VITE_API_BASE: http://localhost:8000
-    ports:
-      - "5173:5173"
 
 volumes:
   db_data:
