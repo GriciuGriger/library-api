@@ -1,0 +1,62 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+backend/.coverage
+backend/htmlcov/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Node.js (for frontend)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Frontend build
+frontend/dist/
+frontend/.vite/
+
+# Docker
+*.log
+docker-compose.override.yml
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
